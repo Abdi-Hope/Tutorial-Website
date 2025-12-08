@@ -1,0 +1,121 @@
+.premium-features {
+  padding: 28px;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.premium-features h3 {
+  font-size: 26px;
+  color: #f1f5f9;
+  margin-bottom: 28px;
+  text-align: center;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 16px;
+  width: 100%;
+}
+
+.premium-features h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+  border-radius: 2px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.feature-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.feature-card h4 {
+  font-size: 16px;
+  color: #f8fafc;
+  margin-bottom: 10px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-card p {
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-features {
+    padding: 20px;
+  }
+  
+  .feature-card {
+    padding: 16px;
+  }
+}

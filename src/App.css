@@ -1,0 +1,68 @@
+/* App.css - Global Layout Styles Only */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  line-height: 1.6;
+  overflow-x: hidden;
+  color: #e2e8f0;
+}
+
+.parent {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "main sidebar";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr 300px;
+  gap: 20px; /* This controls gaps between ALL grid items */
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Grid Area Definitions */
+.header {
+  grid-area: header;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  grid-area: main;
+
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+/* Ensure no content can overflow the viewport */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  .parent {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "header"
+      "main"
+      "sidebar";
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .parent {
+    padding: 8px;
+    gap: 8px;
+  }
+}

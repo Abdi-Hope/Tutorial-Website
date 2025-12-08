@@ -1,0 +1,50 @@
+/* PremiumFooter.css - Isolated footer styles */
+.premium-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 32px;
+  padding-right: 8px;
+  /* No top margin - spacing handled by parent */
+}
+
+.support-info {
+  text-align: center;
+}
+
+.support-info p {
+  color: #94a3b8;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.contact-methods {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.contact-methods span {
+  color: #cbd5e1;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.contact-methods span:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+@media (max-width: 768px) {
+  .contact-methods {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
