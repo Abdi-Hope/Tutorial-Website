@@ -1,11 +1,12 @@
-// CourseViewer.jsx
+// CourseViewer.jsx - Simplified
 import React from 'react';
 import PropTypes from 'prop-types';
 import CourseButtons from './CourseButtons';
-import ChaptersSidebar from './ChaptersSidebar';
-import ChapterContent from './ChapterContent';
+import ChapterLayout from './ChapterContent';
+import Sidebar from './Sidebar';
 import { coursesData } from '../data/coursesData.js';
-import '../styles/CourseViewer.css';  
+import '../styles/CourseViewer.css';
+
 const CourseViewer = ({ 
   activeCourse, 
   setActiveCourse, 
@@ -13,7 +14,18 @@ const CourseViewer = ({
   setActiveChapter 
 }) => {
   const currentCourse = coursesData[activeCourse];
-  const currentChapter = currentCourse.chapters[activeChapter];
+  
+  const chapters = currentCourse.chapters.map((chapter, index) => ({
+    id: index,
+    title: chapter.title,
+    content: chapter.content,
+    isPremium: !chapter.isFree,
+    icon: null
+  }));
+
+  const handleChapterSelect = (chapterId) => {
+    setActiveChapter(chapterId);
+  };
 
   return (
     <div className="course-viewer">
@@ -26,19 +38,25 @@ const CourseViewer = ({
       </div>
       
       <div className="course-main">
-        <div className="sidebar-container">
-          <ChaptersSidebar
+        <div className="main-content">
+          <ChapterLayout
+            chapters={chapters}
+            activeChapterId={activeChapter}
+            onChapterSelect={handleChapterSelect}
             currentCourse={currentCourse}
-            activeChapter={activeChapter}
-            setActiveChapter={setActiveChapter}
-          />
+          >
+            <div className="content-text">
+              {currentCourse.chapters[activeChapter].content.split('\n').map((line, index) => (
+                <p key={`${index}-${line.substring(0, 20)}`}>{line}</p>
+              ))}
+            </div>
+          </ChapterLayout>
         </div>
         
-        <div className="content-container">
-          <ChapterContent
-            currentChapter={currentChapter}
-            currentCourse={currentCourse}
+        <div className="sidebar-area">
+          <Sidebar 
             activeChapter={activeChapter}
+            currentCourse={currentCourse}
           />
         </div>
       </div>

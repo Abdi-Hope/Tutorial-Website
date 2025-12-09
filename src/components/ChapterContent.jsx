@@ -1,62 +1,79 @@
-import React from 'react';
+// components/ChapterContent.jsx - Fixed version
 import PropTypes from 'prop-types';
 import '../styles/ChapterContent.css';
 
-const ChapterContent = ({ currentChapter, currentCourse, activeChapter }) => {
+const ChapterLayout = ({ 
+  chapters = [], 
+  onChapterSelect = () => {}, 
+  activeChapterId,
+  children
+}) => {
+  const currentChapter = chapters[activeChapterId];
+  
   return (
-    <div className="chapter-content">
-      <div className="content-header">
-        <h2>{currentChapter.title}</h2>
-        <div className="chapter-meta">
-          <span className="course-name">{currentCourse.title}</span>
-          <span className="chapter-number">Chapter {activeChapter + 1} of {currentCourse.chapters.length}</span>
-        </div>
-      </div>
-      
-      <div className="content-body">
-        <div className="content-text">
-          {currentChapter.content.split('\n').map((line, index) => {
-            const lineKey = `${line.substring(0, 20)}-${index}`;
-            
-            return (
-              <p key={lineKey}>
-                {line}
-              </p>
-            );
-          })}
-        </div>
-        
-        {!currentChapter.isFree && (
-          <div className="premium-overlay">
-            <div className="premium-message">
-              <h3>🔒 Premium Content</h3>
-              <p>This chapter is available only for premium members. Upgrade to access all content and features.</p>
-              <button className="upgrade-btn-large">Upgrade to Premium</button>
-            </div>
+    <div className="chapter-layout">
+      {/* Main content */}
+      <main className="content-area">
+        <div className="content-body">
+          {children || (
+            currentChapter ? (
+              <div className="chapter-content">
+                <div className="content-text">
+                  {typeof currentChapter.content === 'string' 
+                    ? currentChapter.content.split('\n').map((line) => (
+                      // Using content hash for key instead of array index
+                      <p key={`${currentChapter.id}-${line.slice(0, 20).replaceAll(/\s/g, '-')}`}>
+                        {line}
+                      </p>
+                    ))
+                    : currentChapter.content
+                  }
+                </div>
+              </div>
+            ) : (
+              <div className="no-content">
+                <p>Select a chapter to view content</p>
+              </div>
+            )
+          )}
+          
+          {/* Navigation buttons */}
+          <div className="chapter-navigation">
+            <button
+              className="nav-btn prev"
+              onClick={() => onChapterSelect(Math.max(0, activeChapterId - 1))}
+              disabled={activeChapterId === 0}
+              aria-label="Previous chapter"
+            >
+              ← Previous Chapter
+            </button>
+            <button
+              className="nav-btn next"
+              onClick={() => onChapterSelect(Math.min(chapters.length - 1, activeChapterId + 1))}
+              disabled={activeChapterId === chapters.length - 1}
+              aria-label="Next chapter"
+            >
+              Next Chapter →
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      </main>
     </div>
   );
 };
 
-ChapterContent.propTypes = {
-  currentChapter: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    isFree: PropTypes.bool.isRequired
-  }).isRequired,
-  currentCourse: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    chapters: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        content: PropTypes.string.isRequired,
-        isFree: PropTypes.bool.isRequired
-      })
-    ).isRequired
-  }).isRequired,
-  activeChapter: PropTypes.number.isRequired
+ChapterLayout.propTypes = {
+  chapters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+      isPremium: PropTypes.bool
+    })
+  ).isRequired,
+  onChapterSelect: PropTypes.func.isRequired,
+  activeChapterId: PropTypes.number.isRequired,
+  children: PropTypes.node
 };
 
-export default ChapterContent;
+export default ChapterLayout;

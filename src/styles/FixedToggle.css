@@ -1,0 +1,153 @@
+/* styles/FixedToggle.css */
+.fixed-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 20px;
+  height: 40px;
+  z-index: 1000;
+  background: var(--primary-color, #667eea);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fixed-toggle:hover {
+  background: var(--secondary-color, #764ba2);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.fixed-toggle:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.fixed-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Hamburger icon container */
+.toggle-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 12px;
+  height: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Hamburger lines */
+.toggle-icon span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: white;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animation when toggling */
+.fixed-toggle:hover .toggle-icon span {
+  background: white;
+}
+
+/* Transform hamburger to X when sidebar is open */
+.fixed-toggle .toggle-icon span:nth-child(1) {
+  transform: translateY(0) rotate(0);
+}
+
+.fixed-toggle .toggle-icon span:nth-child(2) {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.fixed-toggle .toggle-icon span:nth-child(3) {
+  transform: translateY(0) rotate(0);
+}
+
+/* When sidebar is open, transform to X */
+.fixed-toggle:not(.open) .toggle-icon span:nth-child(1) {
+  transform: none;
+}
+
+.fixed-toggle:not(.open) .toggle-icon span:nth-child(2) {
+  opacity: 1;
+}
+
+.fixed-toggle:not(.open) .toggle-icon span:nth-child(3) {
+  transform: none;
+}
+
+/* Alternative: Add a class to the parent component based on isOpen prop */
+/* You would need to conditionally add 'open' class to FixedToggle component */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .fixed-toggle {
+    top: 15px;
+    left: 15px;
+    width: 18px;
+    height: 36px;
+  }
+  
+  .toggle-icon {
+    width: 11px;
+    height: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fixed-toggle {
+    top: 10px;
+    left: 10px;
+    width: 16px;
+    height: 32px;
+  }
+  
+  .toggle-icon {
+    width: 10px;
+    height: 8px;
+  }
+  
+  .toggle-icon span {
+    height: 1px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .fixed-toggle {
+    background: #4c51bf;
+  }
+  
+  .fixed-toggle:hover {
+    background: #5a67d8;
+  }
+  
+  .toggle-icon span {
+    background: white;
+  }
+}
+
+/* Additional CSS for animated hamburger to X */
+.fixed-toggle.open .toggle-icon span:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.fixed-toggle.open .toggle-icon span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.fixed-toggle.open .toggle-icon span:nth-child(3) {
+  transform: translateY(-4px) rotate(-45deg);
+}

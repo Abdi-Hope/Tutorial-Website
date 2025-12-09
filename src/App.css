@@ -1,68 +1,409 @@
-/* App.css - Global Layout Styles Only */
+/* App.css - Main application styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  /* Color Variables */
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --accent-color: #f5576c;
+  --light-accent: #f093fb;
+  
+  /* Neutral Colors */
+  --bg-color: #ffffff;
+  --surface-color: #f8fafc;
+  --border-color: #e2e8f0;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0f172a;
+    --surface-color: #1e293b;
+    --border-color: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+  }
+}
+
+/* Base styles */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
-  color: #e2e8f0;
 }
 
-.parent {
-  display: grid;
-  grid-template-areas: 
-    "header header"
-    "main sidebar";
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr 300px;
-  gap: 20px; /* This controls gaps between ALL grid items */
-  padding: 20px;
+/* App container */
+.app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
 }
 
-/* Grid Area Definitions */
-.header {
-  grid-area: header;
-  margin-bottom: 20px;
+/* Header Section */
+.app-header {
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
+/* Dark mode header */
+@media (prefers-color-scheme: dark) {
+  .app-header {
+    background-color: rgba(30, 41, 59, 0.9);
+  }
+}
+
+/* Course buttons wrapper */
+.app-header + .course-buttons {
+  background: var(--surface-color);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 80px; /* Adjust based on header height */
+  z-index: 90;
+}
+
+/* App.css - Updated for sidebar toggle */
+/* ... previous styles ... */
+
+/* Main Content Area with sidebar toggle */
+.app-main {
+  flex: 1;
+  display: flex;
+  min-height: calc(100vh - 140px);
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* Chapter sidebar container */
+.chapter-sidebar-container {
+  flex: 0 0 280px;
+  max-width: 280px;
+  background: var(--surface-color);
+  border-right: 1px solid var(--border-color);
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Main content area */
 .main-content {
-  grid-area: main;
-
+  flex: 1;
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  background: var(--bg-color);
+  height: 100%;
+  transition: all 0.3s ease;
 }
 
-.sidebar {
-  grid-area: sidebar;
+.main-content.full-width {
+  margin-left: 0;
 }
 
-/* Ensure no content can overflow the viewport */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
+/* Content header with toggle */
+.content-header-with-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* Responsive Layout */
-@media (max-width: 1024px) {
-  .parent {
-    grid-template-columns: 1fr;
-    grid-template-areas: 
-      "header"
-      "main"
-      "sidebar";
-    grid-template-rows: auto 1fr auto;
-    gap: 10px;
-    padding: 10px;
+.sidebar-toggle-btn {
+  flex: 0 0 auto;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--secondary-color);
+  transform: translateX(-2px);
+}
+
+.content-title {
+  flex: 1;
+}
+
+.content-title h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.chapter-indicator {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Chapter navigation */
+.chapter-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.nav-btn {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 180px;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-btn.prev {
+  background: var(--surface-color);
+  color: var(--text-primary);
+}
+
+/* Right Column - AI Sidebar (30%) */
+.app-sidebar {
+  flex: 0 0 30%;
+  max-width: 30%;
+  background: var(--surface-color);
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  border-left: 1px solid var(--border-color);
+  height: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .chapter-sidebar-container {
+    flex: 0 0 250px;
+    max-width: 250px;
+  }
+  
+  .main-content {
+    flex: 1;
+  }
+  
+  .content-header-with-toggle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .sidebar-toggle-btn {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 992px) {
+  .app-main {
+    flex-direction: column;
+  }
+  
+  .chapter-sidebar-container {
+    position: fixed;
+    top: 140px;
+    left: 0;
+    bottom: 0;
+    z-index: 90;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chapter-sidebar-container.open {
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .app-sidebar {
+    flex: 1;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .sidebar-toggle-btn {
+    position: fixed;
+    top: 120px;
+    left: var(--spacing-md);
+    z-index: 95;
+    box-shadow: var(--shadow-lg);
   }
 }
 
 @media (max-width: 768px) {
-  .parent {
-    padding: 8px;
-    gap: 8px;
+  .content-title h1 {
+    font-size: 1.5rem;
+  }
+  
+  .chapter-indicator {
+    font-size: 0.85rem;
+  }
+  
+  .nav-btn {
+    min-width: 140px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .chapter-navigation {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .nav-btn {
+    width: 100%;
+  }
+}
+
+/* App.css - Add these styles */
+.fixed-sidebar-toggle {
+  position: fixed !important;
+  top: 20px !important;
+  left: 20px !important;
+  width: 20px !important;
+  height: 40px !important;
+  z-index: 1000 !important;
+  background: var(--primary-color, #667eea) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.fixed-sidebar-toggle:hover {
+  background: var(--secondary-color, #764ba2) !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.fixed-sidebar-toggle:active {
+  transform: scale(0.95) !important;
+}
+
+/* Make sure header doesn't overlap with toggle */
+.app-header {
+  padding-left: 60px !important; /* Space for toggle + margin */
+}
+
+/* Responsive adjustments for toggle */
+@media (max-width: 768px) {
+  .fixed-sidebar-toggle {
+    top: 15px !important;
+    left: 15px !important;
+    width: 18px !important;
+    height: 36px !important;
+  }
+  
+  .app-header {
+    padding-left: 50px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .fixed-sidebar-toggle {
+    top: 10px !important;
+    left: 10px !important;
+    width: 16px !important;
+    height: 32px !important;
+    font-size: 10px !important;
+  }
+  
+  .app-header {
+    padding-left: 40px !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .fixed-sidebar-toggle {
+    background: #4c51bf !important;
+  }
+  
+  .fixed-sidebar-toggle:hover {
+    background: #5a67d8 !important;
   }
 }

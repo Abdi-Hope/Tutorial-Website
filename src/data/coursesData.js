@@ -107,8 +107,76 @@ Python's built-in data structures are powerful and flexible.`,
         isFree: false
       }
     ]
+  },
+  "database": {
+    title: "Database Fundamentals",
+    chapters: [
+      {
+        title: "Database Basics",
+        content: `Welcome to the world of Databases! 
+
+In this chapter, you'll learn:
+• Introduction to Databases
+• Types of Databases
+• Basic SQL commands
+• Setting up a simple database`,
+        isFree: true
+      },
+      {
+        title: "SQL Queries",
+        content: `Mastering SQL for database operations.
+
+Topics include:
+• SELECT statements with conditions
+• JOIN operations (INNER, LEFT, RIGHT)
+• Aggregation functions (COUNT, SUM, AVG)
+• Subqueries and nested queries
+• Data manipulation (INSERT, UPDATE, DELETE)`,
+        isFree: false
+      },
+      {
+        title: "Database Design",
+        content: `Learn the principles of good database design.
+
+Covering:
+• Entity-Relationship Diagrams (ERD)
+• Normalization (1NF, 2NF, 3NF)
+• Primary and foreign keys
+• Indexing for performance
+• Database relationships (one-to-one, one-to-many, many-to-many)`,
+        isFree: false
+      }
+    ]
+  },
+  "javascript": {
+    title: "JavaScript Complete Guide",
+    chapters: [
+      {
+        title: "JavaScript Fundamentals",
+        content: `Learn the basics of JavaScript programming.
+
+Topics include:
+• Variables and data types
+• Operators and expressions
+• Control flow (if, else, loops)
+• Functions and scope
+• DOM manipulation basics`,
+        isFree: true
+      },
+      {
+        title: "Advanced JavaScript",
+        content: `Dive deeper into JavaScript concepts.
+
+Covering:
+• Closures and callbacks
+• Promises and async/await
+• ES6+ features
+• Object-oriented JavaScript
+• Error handling`,
+        isFree: false
+      }
+    ]
   }
 };
 
-// Change from named export to default export
 export { coursesData };

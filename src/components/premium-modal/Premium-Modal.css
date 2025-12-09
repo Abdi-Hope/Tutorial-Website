@@ -1,10 +1,11 @@
-/* Premium-Modal.css */
+/* Premium-Modal.css - Complete & Responsive */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Premium Overlay */
 .premium-overlay {
   position: fixed;
   top: 0;
@@ -33,6 +34,7 @@
   }
 }
 
+/* Premium Modal Container */
 .premium-modal {
   background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
   backdrop-filter: blur(20px);
@@ -64,7 +66,7 @@
   }
 }
 
-/* Scrollbar */
+/* Custom Scrollbar */
 .premium-modal::-webkit-scrollbar {
   width: 6px;
 }
@@ -82,6 +84,17 @@
 .premium-modal::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #a78bfa 0%, #8b5cf6 100%);
 }
+
+/* Modal Content Wrapper */
+.modal-content-wrapper {
+  padding: 32px 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ========== BUTTON STYLES ========== */
 
 /* Close Button */
 .close-button {
@@ -112,21 +125,242 @@
   box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
 }
 
-.close-button:focus {
+.close-button:focus-visible {
   outline: 2px solid #ef4444;
   outline-offset: 2px;
 }
 
-/* Modal Content */
-.modal-content-wrapper {
-  padding: 32px 40px;
-  width: 100%;
+/* Primary Buttons */
+.primary-button {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
   display: flex;
-  flex-direction: column;
-  gap: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
-/* Responsive */
+.primary-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+}
+
+.primary-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.primary-button:focus-visible {
+  outline: 3px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Secondary Buttons */
+.secondary-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.secondary-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.secondary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.secondary-button:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Action Button Container */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.action-buttons .primary-button,
+.action-buttons .secondary-button {
+  flex: 1;
+}
+
+/* Small Buttons */
+.small-button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Back Button */
+.back-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #94a3b8;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Icon Button */
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Danger Button */
+.danger-button {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.danger-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* Success Button */
+.success-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.success-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* ========== FORM & INPUT STYLES ========== */
+
+/* Input Fields */
+.modal-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.05);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.modal-input::placeholder {
+  color: #94a3b8;
+}
+
+/* File Upload Button */
+.file-upload-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 30px 20px;
+  color: #94a3b8;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.file-upload-button:hover {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.05);
+  color: #cbd5e1;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Large Tablets and Small Laptops (1024px and below) */
 @media (max-width: 1024px) {
   .premium-overlay {
     justify-content: center;
@@ -142,8 +376,15 @@
     padding: 28px 32px;
     gap: 24px;
   }
+  
+  .primary-button,
+  .secondary-button {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
 }
 
+/* Tablets (768px and below) */
 @media (max-width: 768px) {
   .premium-modal {
     width: 100%;
@@ -164,8 +405,25 @@
     height: 36px;
     font-size: 20px;
   }
+  
+  .primary-button,
+  .secondary-button {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .action-buttons .primary-button,
+  .action-buttons .secondary-button {
+    width: 100%;
+  }
 }
 
+/* Mobile Devices (480px and below) */
 @media (max-width: 480px) {
   .modal-content-wrapper {
     padding: 16px;
@@ -178,5 +436,143 @@
     width: 32px;
     height: 32px;
     font-size: 18px;
+  }
+  
+  .primary-button,
+  .secondary-button {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .back-button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .modal-input {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+  
+  .file-upload-button {
+    padding: 20px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Mobile Devices (360px and below) */
+@media (max-width: 360px) {
+  .modal-content-wrapper {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .primary-button,
+  .secondary-button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .close-button {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+}
+
+/* Dark Mode Preference */
+@media (prefers-color-scheme: dark) {
+  .premium-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  }
+  
+  .premium-modal {
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 0.98) 100%);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .premium-overlay {
+    position: static;
+    background: white;
+  }
+  
+  .premium-modal {
+    box-shadow: none;
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .close-button {
+    display: none;
+  }
+}
+
+/* Accessibility - High Contrast Mode */
+@media (prefers-contrast: high) {
+  .premium-modal {
+    border: 2px solid white;
+  }
+  
+  .close-button {
+    border: 2px solid white;
+  }
+  
+  .primary-button,
+  .secondary-button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .premium-overlay,
+  .premium-modal,
+  .close-button,
+  .primary-button,
+  .secondary-button,
+  .back-button,
+  .icon-button {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+  .primary-button,
+  .secondary-button,
+  .close-button,
+  .back-button {
+    min-height: 44px; /* Minimum touch target size */
+    min-width: 44px;
+  }
+  
+  .close-button {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .modal-input {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Landscape Orientation */
+@media (max-height: 600px) and (orientation: landscape) {
+  .premium-modal {
+    max-height: 95vh;
+    max-width: 80vw;
+  }
+  
+  .modal-content-wrapper {
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  .primary-button,
+  .secondary-button {
+    padding: 10px 20px;
   }
 }
